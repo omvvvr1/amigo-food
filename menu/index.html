@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Food - Delicious Snack Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d35400;
+            --secondary: #e67e22;
+            --accent: #f39c12;
+            --light: #fff8f0;
+            --dark: #2c3e50;
+            --text: #333;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --grill: #c0392b;
+            --salad: #27ae60;
+            --drink: #3498db;
+            --pizza: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdf6e3, #f5f5f5);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .arabic-font {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-btn i {
+            color: var(--accent);
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .category-btn:hover i, .category-btn.active i {
+            color: white;
+        }
+        
+        .menu-category {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .category-header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .category-header i {
+            font-size: 1.8rem;
+        }
+        
+        .category-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--light);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .item-image {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+        
+        .item-details {
+            padding: 1rem;
+            flex-grow: 1;
+        }
+        
+        .item-name {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .item-price {
+            color: var(--primary);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .item-arabic {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+            direction: rtl;
+        }
+        
+        .item-description {
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .machoui-header {
+            background: linear-gradient(to right, var(--grill), var(--primary));
+        }
+        
+        .juice-header {
+            background: linear-gradient(to right, #f1c40f, #f39c12);
+        }
+        
+        .salad-header {
+            background: linear-gradient(to right, var(--salad), #2ecc71);
+        }
+        
+        .drink-header {
+            background: linear-gradient(to right, var(--drink), #2980b9);
+        }
+        
+        .pizza-header {
+            background: linear-gradient(to right, var(--pizza), #c0392b);
+        }
+        
+        .subcategory-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 1rem 0;
+            margin: 1rem 0;
+            border-bottom: 2px dashed var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .category-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+            margin: 0.5rem 0;
+        }
+        
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <h2>Amigo Food</h2>
+        <p class="tagline">Bringing you the finest fast food with over 20 years of experience</p>
+    </header>
+    
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Complete Menu</h2>
+        </div>
+
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-star"></i> All Items
+            </button>
+            <button class="category-btn" data-category="juices">
+                <i class="fas fa-glass-whiskey"></i> Juices
+            </button>
+            <button class="category-btn" data-category="boissons">
+                <i class="fas fa-bottle-water"></i> Boissons
+            </button>
+            <button class="category-btn" data-category="pizza">
+                <i class="fas fa-pizza-slice"></i> Pizza
+            </button>
+            <button class="category-btn" data-category="sandwich">
+                <i class="fas fa-bread-slice"></i> Sandwiches
+            </button>
+            <button class="category-btn" data-category="salad">
+                <i class="fas fa-leaf"></i> Salads
+            </button>
+            <button class="category-btn" data-category="plat">
+                <i class="fas fa-drumstick-bite"></i> Plates
+            </button>
+            <button class="category-btn" data-category="machoui">
+                <i class="fas fa-fire"></i> Grilled Plates
+            </button>
+            <button class="category-btn" data-category="pasticcio">
+                <i class="fas fa-bowl-food"></i> Pasticcio
+            </button>
+            <button class="category-btn" data-category="tacos">
+                <i class="fas fa-drumstick-bite"></i> Tacos
+            </button>
+            <button class="category-btn" data-category="tchikka">
+                <i class="fas fa-hamburger"></i> Tchikka & Burgers
+            </button>
+        </div>
+
+        <!-- Juices Section -->
+        <section class="menu-category" data-category="juices">
+            <div class="category-header juice-header">
+                <i class="fas fa-glass-whiskey"></i>
+                <h2>Fresh Juices</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/oronj.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus D'Orange</span>
+                            <span class="item-price">18 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير البرتقال</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/banan.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Banane</span>
+                            <span class="item-price">15 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير الموز</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/monge.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Mango</span>
+                            <span class="item-price">20 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير المانجو</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pome.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Pomme</span>
+                            <span class="item-price">15 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير التفاح</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/citron.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Citron</span>
+                            <span class="item-price">16 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير الليمون</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/frise.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Fraise</span>
+                            <span class="item-price">20 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير الفراولة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/avocat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus D'Avocat</span>
+                            <span class="item-price">18 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير الأفوكادو</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/kiwi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Kiwi</span>
+                            <span class="item-price">20 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير الكيوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/panachi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Jus De Panaché</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">عصير باناشيه</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Boissons Section -->
+        <section class="menu-category" data-category="boissons">
+            <div class="category-header drink-header">
+                <i class="fas fa-bottle-water"></i>
+                <h2>Boissons</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/super.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>SUPER</span>
+                            <span class="item-price">18 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/hell.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>HELL</span>
+                            <span class="item-price">15 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/red.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>RED BALL</span>
+                            <span class="item-price">20 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/rani.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>RANI</span>
+                            <span class="item-price">15 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/maxi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Soda Maxi</span>
+                            <span class="item-price">15 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/canait.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Soda Canette</span>
+                            <span class="item-price">10 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/olmas.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Oulmas Eau</span>
+                            <span class="item-price">8 DH</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/odrink.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Oulmas Tropikal</span>
+                            <span class="item-price">10 DH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pizza Section -->
+        <section class="menu-category" data-category="pizza">
+            <div class="category-header pizza-header">
+                <i class="fas fa-pizza-slice"></i>
+                <h2>Delicious Pizzas</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Margherita (M)</span>
+                                <span class="item-price">35 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Margherita (G)</span>
+                                <span class="item-price">45 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيتزا مرغريتا</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Polet (M)</span>
+                                <span class="item-price">45 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Polet (G)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا بولي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>4 Fromage (M)</span>
+                                <span class="item-price">40 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>4 Fromage (G)</span>
+                                <span class="item-price">50 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا 4 فرماج</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Thon (M)</span>
+                                <span class="item-price">45 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Thon (G)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا تونة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Viande Hachee (M)</span>
+                                <span class="item-price">45 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Viande Hachee (G)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا كفتة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>4 Saisons (M)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>4 Saisons (G)</span>
+                                <span class="item-price">65 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا 4 فصول</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Froui De Mer (M)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Froui De Mer (G)</span>
+                                <span class="item-price">65 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا فواكه البحر</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pizza.png');"></div>
+                    <div class="item-details">
+                        <div class="price-container">
+                            <div class="item-name">
+                                <span>Vegetarienne (M)</span>
+                                <span class="item-price">45 DH</span>
+                            </div>
+                            <div class="item-name">
+                                <span>Vegetarienne (G)</span>
+                                <span class="item-price">55 DH</span>
+                            </div>
+                        </div>
+                        <div class="item-arabic">بيزا نباتية</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sandwiches Section -->
+        <section class="menu-category" data-category="sandwich">
+            <div class="category-header">
+                <i class="fas fa-bread-slice"></i>
+                <h2>Sandwiches & Omelettes</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="subcategory-title">🥪 SANDWICHES</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Mixte</span>
+                            <span class="item-price">27 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش ميكست</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Dinde</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش داند</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Viande Hachee</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش كفنة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Foie</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش كبدة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Saucisse</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش صوصيص</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Nuggets</span>
+                            <span class="item-price">27 DH</span>
+                        </div>
+                        <div class="item-arabic">سندويش نوكيت</div>
+                    </div>
+                </div>
+                
+                <div class="subcategory-title">🍳 OMELETTES</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Chef Fromage</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط شاف فرماج</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Cachir</span>
+                            <span class="item-price">17 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط كاشير</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Fromage</span>
+                            <span class="item-price">17 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط فرماج</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Fromage Rouge</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط فرماج احمر</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Cachir Fromage</span>
+                            <span class="item-price">19 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط كاشير فرماج</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/sandwich.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Omelette Charcuterie</span>
+                            <span class="item-price">17 DH</span>
+                        </div>
+                        <div class="item-arabic">أمليط شاغكطخي</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Salads Section -->
+        <section class="menu-category" data-category="salad">
+            <div class="category-header salad-header">
+                <i class="fas fa-seedling"></i>
+                <h2>Fresh Salads</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/salad.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Salade Riz</span>
+                            <span class="item-price">30 DH</span>
+                        </div>
+                        <div class="item-arabic">سلطة الأرز</div>
+                        <div class="item-description">Rice, tuna, potatoes, tomatoes, cucumber, olives, egg, corn, mayonnaise</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/salad.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Salade Variée</span>
+                            <span class="item-price">30 DH</span>
+                        </div>
+                        <div class="item-arabic">سلطة متنوعة</div>
+                        <div class="item-description">Lettuce, carrots, potatoes, tomatoes, cucumber, pasta, olives, tuna</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/salad.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Salade Amigo</span>
+                            <span class="item-price">40 DH</span>
+                        </div>
+                        <div class="item-arabic">سلطة أميكو</div>
+                        <div class="item-description">Avocado, cheese, turkey meat, Amigo sauce, corn</div>
+                    </div>
+                </div>
+                
+        </section>
+        
+        <!-- Plats Section -->
+        <section class="menu-category" data-category="plat">
+            <div class="category-header">
+                <i class="fas fa-drumstick-bite"></i>
+                <h2>Plates</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Mixte</span>
+                            <span class="item-price">45 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق ميكست</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Dinde</span>
+                            <span class="item-price">45 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق داند</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Viande Hachee</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق كفتة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Foie</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق كبدة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Saucisse</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق صوصيص</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/plat.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Nuggets</span>
+                            <span class="item-price">45 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق نوكيت</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Plats Machaoui Section -->
+        <section class="menu-category" data-category="machoui">
+            <div class="category-header machoui-header">
+                <i class="fas fa-fire"></i>
+                <h2>Grilled Plates</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/machaoi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Mixte Machaoui</span>
+                            <span class="item-price">70 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق ميكست مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/machaoi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Dinde Machaoui</span>
+                            <span class="item-price">60 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق داند مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/machaoi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Viande Hachee Machaoui</span>
+                            <span class="item-price">60 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق كفتة مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/machaoi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Foie Machaoui</span>
+                            <span class="item-price">60 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق كبدة مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/machaoi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Plat Saucisse Machaoui</span>
+                            <span class="item-price">60 DH</span>
+                        </div>
+                        <div class="item-arabic">طبق صوصيص مشاوي</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pasticcio Section -->
+        <section class="menu-category" data-category="pasticcio">
+            <div class="category-header">
+                <i class="fas fa-bowl-food"></i>
+                <h2>Pasticcio</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Dinde</span>
+                            <span class="item-price">38 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو داند</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Dinde Fumee</span>
+                            <span class="item-price">33 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو داند فومي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Charcuterie</span>
+                            <span class="item-price">33 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو شاغكطفي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Viande Hachee</span>
+                            <span class="item-price">38 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو كفتة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Mixte</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو ميكست</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/pacticco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Pasticcio Fruit De Mer</span>
+                            <span class="item-price">40 DH</span>
+                        </div>
+                        <div class="item-arabic">باستيشو فواكه البحر</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tacos Section -->
+        <section class="menu-category" data-category="tacos">
+            <div class="category-header">
+                <i class="fas fa-drumstick-bite"></i>
+                <h2>Tacos</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="subcategory-title">🌮 TACOS CLASSIC</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Mixte</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس ميكست</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Dinde</span>
+                            <span class="item-price">38 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس داند</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Viande Haché</span>
+                            <span class="item-price">38 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس كفتة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Saucisses</span>
+                            <span class="item-price">38 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس صوصيص</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Nuggets</span>
+                            <span class="item-price">40 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس نوكيت</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/taco.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Foie</span>
+                            <span class="item-price">40 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس كبدة</div>
+                    </div>
+                </div>
+                
+                <div class="subcategory-title">🔥 TACOS MACHAOUI</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tmachewi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Mixte Machaoui</span>
+                            <span class="item-price">65 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس ميكست مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tmachewi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Dinde Machaoui</span>
+                            <span class="item-price">45 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس داند مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tmachewi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Viande Haché Machaoui</span>
+                            <span class="item-price">50 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس كفتة مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tmachewi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Saucisses Machaoui</span>
+                            <span class="item-price">45 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس صوصيص مشاوي</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tmachewi.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tacos Foie Machaoui</span>
+                            <span class="item-price">50 DH</span>
+                        </div>
+                        <div class="item-arabic">طاكوس كبدة مشاوي</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tchikka & Burgers Section -->
+        <section class="menu-category" data-category="tchikka">
+            <div class="category-header">
+                <i class="fas fa-hamburger"></i>
+                <h2>Tchikka & Burgers</h2>
+            </div>
+            <div class="menu-grid">
+                <div class="subcategory-title">🥙 TCHIKKA</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Mixte</span>
+                            <span class="item-price">27 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا ميكست</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Dinde</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا داند</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Viande Hachee</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا كفتة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Saucisses</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا صوصيص</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Nuggets</span>
+                            <span class="item-price">27 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا نوكيت</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Foie</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا كبدة</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Chef</span>
+                            <span class="item-price">22 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا شاف</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/tchikka.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Tchikka Thon</span>
+                            <span class="item-price">25 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيكا تون</div>
+                    </div>
+                </div>
+                
+                <div class="subcategory-title">🍔 BURGERS</div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/burger.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Hamburger</span>
+                            <span class="item-price">33 DH</span>
+                        </div>
+                        <div class="item-arabic">هامبرجر</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/burger.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Cheese Burger</span>
+                            <span class="item-price">33 DH</span>
+                        </div>
+                        <div class="item-arabic">تشيز برجر</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/burger.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Royal Burger</span>
+                            <span class="item-price">43 DH</span>
+                        </div>
+                        <div class="item-arabic">رويال برجر</div>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-image" style="background-image: url('photo/burger.png');"></div>
+                    <div class="item-details">
+                        <div class="item-name">
+                            <span>Chicken Burger</span>
+                            <span class="item-price">33 DH</span>
+                        </div>
+                        <div class="item-arabic">شيكن برجر</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Marché, mosque nour,AZROU</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+212 6 63 80 15 22 </span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                <span>Open Daily: 12:00 AM - 10:00 PM</span>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; Snack Hamid Allouli .
+        </div>
+    </footer>
+
+    <script>
+        // Category filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const menuCategories = document.querySelectorAll('.menu-category');
+            
+            // Function to show all categories
+            function showAllCategories() {
+                menuCategories.forEach(category => {
+                    category.style.display = 'block';
+                });
+            }
+            
+            // Initialize by showing all categories
+            showAllCategories();
+            
+            // Add event listeners to category buttons
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    const category = btn.getAttribute('data-category');
+                    
+                    // Handle "All" category
+                    if (category === 'all') {
+                        showAllCategories();
+                        return;
+                    }
+                    
+                    // Show/hide categories
+                    menuCategories.forEach(cat => {
+                        if (cat.getAttribute('data-category') === category) {
+                            cat.style.display = 'block';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
